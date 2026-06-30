@@ -429,6 +429,154 @@ nav.scrolled {
     color: var(--primary-color);
 }
 
+/* Live Client Projects Section */
+.section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: -2.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.live-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.live-project-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.live-project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.live-project-card:hover::before {
+    opacity: 1;
+}
+
+.live-project-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.15);
+}
+
+.live-proj-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: rgba(108, 99, 255, 0.12);
+    border: 1px solid rgba(108, 99, 255, 0.25);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.live-project-card:hover .live-proj-icon {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.35);
+}
+
+.live-proj-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.live-proj-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    background: rgba(108, 99, 255, 0.1);
+    padding: 0.2rem 0.7rem;
+    border-radius: 50px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    display: inline-block;
+    margin-bottom: 0.6rem;
+}
+
+.live-proj-info h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: var(--transition);
+}
+
+.live-project-card:hover .live-proj-info h3 {
+    color: var(--primary-color);
+}
+
+.live-proj-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.live-proj-url {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition);
+}
+
+.live-proj-url i {
+    color: var(--primary-color);
+    font-size: 0.75rem;
+}
+
+.live-project-card:hover .live-proj-url {
+    color: var(--text-primary);
+}
+
+.live-proj-arrow {
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    opacity: 0;
+    transform: translate(-5px, 5px);
+    transition: var(--transition);
+}
+
+.live-project-card:hover .live-proj-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+    color: var(--primary-color);
+}
+
 /* Experience Timeline */
 .experience-timeline {
     max-width: 800px;
@@ -488,6 +636,123 @@ nav.scrolled {
 .timeline-tech span {
     font-size: 0.85rem;
     color: var(--primary-color);
+}
+
+/* Active/Current Timeline Dot */
+.timeline-dot-active {
+    width: 16px;
+    height: 16px;
+    left: -2.55rem;
+    background: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2), 0 0 12px rgba(34, 197, 94, 0.5);
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2), 0 0 12px rgba(34, 197, 94, 0.5); }
+    50%       { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.1), 0 0 20px rgba(34, 197, 94, 0.7); }
+}
+
+/* Current Job Card */
+.timeline-content-current {
+    border-color: rgba(34, 197, 94, 0.25);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(34, 197, 94, 0.04) 100%);
+}
+
+.timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.timeline-header h3 { margin-bottom: 0; }
+
+.current-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.current-badge i {
+    font-size: 0.5rem;
+    animation: blink 1.4s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+}
+
+/* Journey Steps (Internship → Employee) */
+.timeline-journey {
+    margin: 1.2rem 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.journey-step {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+}
+
+.journey-step p {
+    margin-bottom: 0 !important;
+    font-size: 0.92rem;
+}
+
+.journey-arrow {
+    display: flex;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    opacity: 0.6;
+}
+
+.journey-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px;
+    margin-bottom: 0.6rem;
+}
+
+.internship-label {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+.employee-label {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.timeline-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
 }
 
 /* Achievements */

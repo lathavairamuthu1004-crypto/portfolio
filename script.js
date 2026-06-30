@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Scroll Disclosure (Reveal on Scroll)
-    const revealElements = document.querySelectorAll('.reveal, .project-card, .achievement-card, .timeline-item');
+    const revealElements = document.querySelectorAll('.reveal, .project-card, .achievement-card, .timeline-item, .live-project-card');
     
     const revealOnScroll = () => {
         const triggerBottom = window.innerHeight * 0.85;
@@ -77,4 +77,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.project-card').forEach((card, index) => {
         card.style.transitionDelay = `${index * 0.1}s`;
     });
+
+    // Add staggered delay to live project cards
+    document.querySelectorAll('.live-project-card').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(25px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.07}s, transform 0.6s ease ${index * 0.07}s, border-color 0.3s, box-shadow 0.3s`;
+    });
+
+    // Intersection Observer for live project cards
+    const liveCardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.live-project-card').forEach(card => {
+        liveCardObserver.observe(card);
+    });
 });
+// npx serve e:\portfolio
