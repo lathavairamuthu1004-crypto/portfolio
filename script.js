@@ -155,7 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.emailjs && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
                     window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
                     await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                        from_name:  name,
+                        title:      `New message from ${name}`,
+                        name:       name,
                         from_email: email,
                         message:    message
                     });
