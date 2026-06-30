@@ -1,10 +1,15 @@
 // =============================================
-//  SUPABASE CONFIG — replace with your own keys
+//  SUPABASE CONFIG
 // =============================================
 const SUPABASE_URL = 'https://bmrehibhwycffqpadwxo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_NyLXMxuvsQNRAc9hr9siuw_NrBiW4xD';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabase = null;
+try {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} catch (e) {
+    console.warn('Supabase init failed:', e);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // Cursor Glow Effect
@@ -134,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMsg.style.display   = 'none';
 
             try {
+                if (!supabase) throw new Error('Supabase not initialized');
                 const { error } = await supabase
                     .from('contacts')
                     .insert([{ name, email, message }]);
