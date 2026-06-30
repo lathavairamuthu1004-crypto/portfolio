@@ -1,3 +1,11 @@
+// =============================================
+//  SUPABASE CONFIG — replace with your own keys
+// =============================================
+const SUPABASE_URL = 'https://bmrehibhwycffqpadwxo.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_NyLXMxuvsQNRAc9hr9siuw_NrBiW4xD';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 document.addEventListener('DOMContentLoaded', () => {
     // Cursor Glow Effect
     const cursor = document.getElementById('cursor-glow');
@@ -98,5 +106,52 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.live-project-card').forEach(card => {
         liveCardObserver.observe(card);
     });
+
+    // =============================================
+    //  Contact Form → Supabase
+    // =============================================
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name    = document.getElementById('contact-name').value.trim();
+            const email   = document.getElementById('contact-email').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+            const btnText    = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            const successMsg = document.getElementById('form-success');
+            const errorMsg   = document.getElementById('form-error');
+            const submitBtn  = document.getElementById('contact-submit');
+
+            if (!name || !email || !message) return;
+
+            // Show loading state
+            btnText.style.display    = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled       = true;
+            successMsg.style.display = 'none';
+            errorMsg.style.display   = 'none';
+
+            try {
+                const { error } = await supabase
+                    .from('contacts')
+                    .insert([{ name, email, message }]);
+
+                if (error) throw error;
+
+                // Success
+                successMsg.style.display = 'block';
+                contactForm.reset();
+            } catch (err) {
+                console.error('Supabase error:', err);
+                errorMsg.style.display = 'block';
+            } finally {
+                btnText.style.display    = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled       = false;
+            }
+        });
+    }
 });
 // npx serve e:\portfolio
