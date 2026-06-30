@@ -6,7 +6,9 @@ const SUPABASE_ANON_KEY = 'sb_publishable_NyLXMxuvsQNRAc9hr9siuw_NrBiW4xD';
 
 let supabase = null;
 try {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    if (window.supabase) {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
 } catch (e) {
     console.warn('Supabase init failed:', e);
 }
