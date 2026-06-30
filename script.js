@@ -4,6 +4,13 @@
 const SUPABASE_URL      = 'https://bmrehibhwycffqpadwxo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_NyLXMxuvsQNRAc9hr9siuw_NrBiW4xD';
 
+// =============================================
+//  EMAILJS CONFIG — replace with your own IDs
+// =============================================
+const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';   // 🔑 from Account → API Keys
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';           // 🔑 from Email Services
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';          // 🔑 from Email Templates
+
 // Send data directly to Supabase REST API using fetch
 async function insertContact(name, email, message) {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/contacts`, {
@@ -141,7 +148,19 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMsg.style.display   = 'none';
 
             try {
+                // 1️⃣ Save to Supabase database
                 await insertContact(name, email, message);
+
+                // 2️⃣ Send email notification via EmailJS
+                if (window.emailjs && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+                    window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+                    await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                        from_name:  name,
+                        from_email: email,
+                        message:    message
+                    });
+                }
+
                 successMsg.style.display = 'block';
                 contactForm.reset();
             } catch (err) {
