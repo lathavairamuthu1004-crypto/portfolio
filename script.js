@@ -7,9 +7,9 @@ const SUPABASE_ANON_KEY = 'sb_publishable_NyLXMxuvsQNRAc9hr9siuw_NrBiW4xD';
 // =============================================
 //  EMAILJS CONFIG — replace with your own IDs
 // =============================================
-const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';   // 🔑 from Account → API Keys
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';           // 🔑 from Email Services
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';          // 🔑 from Email Templates
+const EMAILJS_PUBLIC_KEY  = 'j3WQx3onAtZjjF-pe';
+const EMAILJS_SERVICE_ID  = 'service_oybx6zh';
+const EMAILJS_TEMPLATE_ID = 'template_b22clsu';
 
 // Send data directly to Supabase REST API using fetch
 async function insertContact(name, email, message) {
